@@ -9,6 +9,16 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <script>
+      function guid() {
+        function s4() {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+          s4() + '-' + s4() + s4() + s4();
+      }
+    
       var qs = (function(a) {
           if (a == "") return {};
           var b = {};
@@ -22,7 +32,18 @@
           }
           return b;
       })(window.location.search.substr(1).split('&'));
-      console.log(qs);
+      if (qs.token) {
+        var spInput = document.getElementById("spInputToken");
+        var spOutput = document.getElementById("spOutputToken");
+        var anchor = document.getElementById("btnApp");
+        
+        spInput.innerHTML = "Your input token is: " + qs.token + "<br />";
+        
+        var outputToken = guid();
+        spOutput.innerHTML = "Your output token is: " + outputToken + "<br />";
+        
+        anchor.setAttribute("href", "AdvURLss://input/" + qs.token + "/output/" + outputToken);
+      }
     </script>
     
   </head>
@@ -30,14 +51,17 @@
     <section class="page-header">
       <h1 class="project-name">Redirector</h1>
       <h2 class="project-tagline"></h2>
-      <a href="AdvURLss://test" class="btn" >Test</a>
+      <a id="btnApp" href="AdvURLss://test" class="btn" >Test</a>
       <a href="https://github.com/mcgrews3/redirector" class="btn">View on GitHub</a>
       <a href="https://github.com/mcgrews3/redirector/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/mcgrews3/redirector/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
-
+      <p>
+        <span id="spInputToken"></span>
+        <span id="spOutputToken"></span>
+      </p>
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/mcgrews3/redirector">Redirector</a> is maintained by <a href="https://github.com/mcgrews3">mcgrews3</a>.</span>
 
