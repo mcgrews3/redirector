@@ -33,24 +33,26 @@
           return b;
       })(window.location.search.substr(1).split('&'));
       
-      if (qs.token) {
-        var spInput = document.getElementById("spInputToken");
-        var spOutput = document.getElementById("spOutputToken");
-        var anchor = document.getElementById("btnApp");
-        
-        console.log(spInput, spOutput, anchor);
-        
-        spInput.innerHTML = "Your input token is: " + qs.token + "<br />";
-        
-        var outputToken = guid();
-        spOutput.innerHTML = "Your output token is: " + outputToken + "<br />";
-        
-        anchor.setAttribute("href", "AdvURLss://input/" + qs.token + "/output/" + outputToken);
+      var loadFn = function () {
+        if (qs.token) {
+          var spInput = document.getElementById("spInputToken");
+          var spOutput = document.getElementById("spOutputToken");
+          var anchor = document.getElementById("btnApp");
+          
+          console.log(spInput, spOutput, anchor);
+          
+          spInput.innerHTML = "Your input token is: " + qs.token + "<br />";
+          
+          var outputToken = guid();
+          spOutput.innerHTML = "Your output token is: " + outputToken + "<br />";
+          
+          anchor.setAttribute("href", "AdvURLss://input/" + qs.token + "/output/" + outputToken);
+        }
       }
     </script>
     
   </head>
-  <body>
+  <body onload="loadFn();">
     <section class="page-header">
       <h1 class="project-name">Redirector</h1>
       <h2 class="project-tagline"></h2>
